@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mObywatel | https://discord.gg/FR6rETNsSZ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header p {
+            margin: 5px 0;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .generator-container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            max-width: 300px;
+        }
+
+        .generator-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #generator-btn {
+            display: block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center; 
+        }
+
+        #generator-btn:hover {
+            background-color: #555;
+        }
+
+        #logout-btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #logout-btn:hover {
+            background-color: #555;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column; 
+                text-align: center; 
+            }
+        }
+
+        a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        #monitoring-btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: #FF0000;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        i {
+            padding: 0px 6px;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #121212;
+            transition: opacity 0.75s, visibility 0.75s;
+        }
+
+        .loader--hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader::after {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border: 15px solid #dddddd;
+            border-top-color: #1e1e1e;
+            border-radius: 50%;
+            animation: loading 0.75s ease infinite;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0turn);
+            }
+            to {
+                transform: rotate(1turn);
+            }
+        }
+    </style>
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.querySelector(".loader");
+            loader.classList.add("loader--hidden");
+            loader.addEventListener("transitionend", () => {
+                document.body.removeChild(loader);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="loader"></div>
+    <header>
+        <div class="header-left">
+            <h1>mObywatel | https://discord.gg/FR6rETNsSZ</h1>
+            <p>Logged in as <span id="username"></span></p>
+        </div>
+        <div class="header-right">
+            <a href="#" id="monitoring-btn" onclick="showMonitoring()">Monitoring<i class="fas fa-desktop" style="color: #ff0000;"></i></a>
+            <a href="#" id="logout-btn" onclick="logout()">Logout<i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </header>
+    <div class="content">
+        <div class="generator-container">
+            <h3>mObywatel 3.0</h3>
+            <a href="/generator.html" id="generator-btn">Generator</a>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = '/login.html';
+        }
+
+        // Display username
+        document.getElementById('username').textContent = localStorage.getItem('username') || 'Unknown';
+
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            localStorage.removeItem('username');
+            window.location.href = '/login.html';
+        }
+
+        function showMonitoring() {
+            alert('Monitoring functionality would be implemented here');
+        }
+    </script>
+</body>
+</html>
